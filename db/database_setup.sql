@@ -27,6 +27,14 @@ CREATE TABLE products (
   PRIMARY KEY (product_id)
 );
 
+CREATE TABLE inventory (
+  inventory_id SERIAL NOT NULL UNIQUE,
+  product_id INT NOT NULL,
+  count INT NOT NULL,
+  PRIMARY KEY (inventory_id),
+  FOREIGN KEY (product_id) REFERENCES products (product_id) 
+);
+
 CREATE TABLE orders (
   order_id SERIAL NOT NULL UNIQUE,
   user_id INT NOT NULL,
