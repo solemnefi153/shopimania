@@ -1,3 +1,7 @@
+
+-- Run this to reset the database
+DROP TABLE IF EXISTS  roles, users, products, inventory, orders CASCADE;
+
 CREATE TABLE roles (
   role_id SERIAL NOT NULL UNIQUE,
   description VARCHAR(20)  NOT NULL UNIQUE,
@@ -10,6 +14,10 @@ CREATE TABLE users (
   first_name VARCHAR(20)  NOT NULL,
   last_name VARCHAR(20)  NOT NULL,
   email VARCHAR(50) NOT NULL UNIQUE,
+  street_address VARCHAR(50),
+  apt_or_unit VARCHAR(10),
+  zip_code VARCHAR(20),
+  country VARCHAR(20),
   password VARCHAR,
   PRIMARY KEY (user_id), 
   FOREIGN KEY (role_id) REFERENCES roles (role_id) 
@@ -19,6 +27,7 @@ CREATE TABLE products (
   product_id SERIAL NOT NULL UNIQUE,
   product_name VARCHAR(30) NOT NULL UNIQUE,
   product_description TEXT,
+  price NUMERIC(10, 2) NOT NULL, 
   weight NUMERIC(10, 2), 
   measure VARCHAR(5),
   height NUMERIC (30, 2),
@@ -44,3 +53,28 @@ CREATE TABLE orders (
   PRIMARY KEY (order_id), 
   FOREIGN KEY (user_id) REFERENCES users (user_id) 
 );
+
+
+-- Run This query to check all foreign keys of a table
+
+-- SELECT
+--     tc.table_schema, 
+--     tc.constraint_name, 
+--     tc.table_name, 
+--     kcu.column_name, 
+--     ccu.table_schema AS foreign_table_schema,
+--     ccu.table_name AS foreign_table_name,
+--     ccu.column_name AS foreign_column_name 
+-- FROM 
+--     information_schema.table_constraints AS tc 
+--     JOIN information_schema.key_column_usage AS kcu
+--       ON tc.constraint_name = kcu.constraint_name
+--       AND tc.table_schema = kcu.table_schema
+--     JOIN information_schema.constraint_column_usage AS ccu
+--       ON ccu.constraint_name = tc.constraint_name
+--       AND ccu.table_schema = tc.table_schema
+-- WHERE tc.constraint_type = 'FOREIGN KEY' AND tc.table_name='mytable';
+
+
+
+
