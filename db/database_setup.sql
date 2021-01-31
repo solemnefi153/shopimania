@@ -19,20 +19,20 @@ CREATE TABLE products (
   product_id SERIAL NOT NULL UNIQUE,
   product_name VARCHAR(30) NOT NULL UNIQUE,
   product_description TEXT,
-  weight NUMBER(10, 2), 
+  weight NUMERIC(10, 2), 
   measure VARCHAR(5),
-  height NUMBER (30, 2),
-  length NUMBER (30, 2),
+  height NUMERIC (30, 2),
+  length NUMERIC (30, 2),
   image BYTEA NOT NULL, 
-  PRIMARY KEY (preduct_id)
+  PRIMARY KEY (product_id)
 );
 
 CREATE TABLE orders (
   order_id SERIAL NOT NULL UNIQUE,
   user_id INT NOT NULL,
-  order_date DATE NOT NULL DEFAULT CURRENT_DATE
+  order_date DATE NOT NULL DEFAULT CURRENT_DATE,
   traking_number VARCHAR,
-  order_details JSONB
+  order_details JSONB,
   PRIMARY KEY (order_id), 
   FOREIGN KEY (user_id) REFERENCES users (user_id) 
 );
