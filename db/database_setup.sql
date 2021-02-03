@@ -1,6 +1,6 @@
 
 -- Run this to reset the database
-DROP TABLE IF EXISTS  roles, users, products, inventory, orders CASCADE;
+DROP TABLE IF EXISTS  roles, users, products, inventory, categories, orders CASCADE;
 
 CREATE TABLE roles (
   role_id SERIAL NOT NULL UNIQUE,
@@ -23,8 +23,15 @@ CREATE TABLE users (
   FOREIGN KEY (role_id) REFERENCES roles (role_id) 
 );
 
+CREATE TABLE categories (
+  category_id SERIAL NOT NULL UNIQUE,
+  description VARCHAR(20)  NOT NULL UNIQUE,
+  PRIMARY KEY (category_id)
+);
+
 CREATE TABLE products (
   product_id SERIAL NOT NULL UNIQUE,
+  category_id INT NOT NULL,
   product_name VARCHAR(30) NOT NULL UNIQUE,
   product_description TEXT,
   price NUMERIC(10, 2) NOT NULL, 
@@ -32,8 +39,9 @@ CREATE TABLE products (
   measure VARCHAR(5),
   height NUMERIC (30, 2),
   length NUMERIC (30, 2),
-  image BYTEA NOT NULL, 
-  PRIMARY KEY (product_id)
+  image BYTEA, 
+  PRIMARY KEY (product_id),
+  FOREIGN KEY (category_id) REFERENCES categories (category_id)
 );
 
 CREATE TABLE inventory (
