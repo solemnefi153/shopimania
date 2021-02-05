@@ -192,5 +192,4 @@ VALUES(
   }'
 );
 
-
-
+select order_id, order_details from orders;
