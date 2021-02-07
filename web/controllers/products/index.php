@@ -106,7 +106,7 @@
             die();
             break;
         default:
-            echo "Decout is happening";
+            echo "Defoult is happening";
             die();
     }
 ?> 
