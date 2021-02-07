@@ -101,7 +101,7 @@
             //grab the product id
             $product_id = intval(test_input($_POST['product_id']));
             $product = getProduct($product_id);
-            //header('Content-type:application/json;charset=utf-8');
+            header('Content-type:application/json;charset=utf-8');
             echo json_encode($product);
             die();
             break;
