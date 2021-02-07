@@ -5,7 +5,7 @@ function createProduct($newProduct){
     try
     {
         //Set up a connection to the database 
-        $db = phpmotorsConnect(); 
+        $db = databaseConnect(); 
         #Create the statemment to insert  the new product in the products table 
         $stmt = "INSERT INTO products (product_id, category_id, product_name, price";
         $stmt .= $newProduct->product_description ? ", product_description" : "";
@@ -55,7 +55,7 @@ function createProduct($newProduct){
         //Create a result object 
         $result = (object) array('success' => false);
         //Save the error message in the result object 
-        $result->error = 'Unabble to create product: ' . $ex->getMessage();
+        $result->Error = 'Unabble to create product: ' . $ex->getMessage();
         //Return the result object 
         return $result;
     }
@@ -65,7 +65,7 @@ function getProducts($category_id){
     try
     {
         //Set up a connection to the database 
-        $db = phpmotorsConnect(); 
+        $db = databaseConnect(); 
         #Create the statemment to insert  the new product in the products table 
         $stmt = "SELECT * FROM products ";
         $stmt .= $category_id ? " where category_id = :category_id;" : ";";
@@ -84,7 +84,34 @@ function getProducts($category_id){
         //Create a result object 
         $result = (object) array('success' => false);
         //Save the error message in the result object 
-        $result->error = 'Unable to return products: ' . $ex->getMessage();
+        $result->Error = 'Unable to return products: ' . $ex->getMessage();
+        //Return the result object 
+        return $result;
+    }
+}
+//Get the product details of a product 
+function getProduct($product_id){
+    try
+    {
+        //Set up a connection to the database 
+        $db = databaseConnect(); 
+        #Create the statemment to insert  the new product in the products table 
+        $stmt = "SELECT * FROM products where product_id = :category_id;";
+        //Prepare the statement 
+        $preparedStmt = $db->prepare($stmt);
+        $preparedStmt->bindValue(':product_id', $product_id, PDO::PARAM_INT);
+        //Execute the prepared statement
+        $preparedStmt->execute();
+        $rows = $preparedStmt->fetchAll(PDO::FETCH_ASSOC);
+        //Return all the products that were found 
+        return $rows;
+    }
+    catch (PDOException $ex)
+    {
+        //Create a result object 
+        $result = (object) array('success' => false);
+        //Save the error message in the result object 
+        $result->Error = 'Unable to return products: ' . $ex->getMessage();
         //Return the result object 
         return $result;
     }

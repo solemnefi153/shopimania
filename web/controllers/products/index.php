@@ -72,17 +72,37 @@
             }
             die();
             break;
-            //Endpoint that creates a new product
+        //Endpoint that gets all the products
         case 'get_products':
             //Check if there are any filters for the search
             $category_id = $_POST['category_id'] ? intval(test_input($_POST['category_id'])) : NULL;
             $results = getProducts($category_id);
-            echo "this is happening 2";
             $products = (object) array(
                 'products' => $results
             );
             header('Content-type:application/json;charset=utf-8');
             echo json_encode($products);
+            die();
+            break;
+        //Endpoint that gets the  product details of a product 
+        case 'get_product':
+            //Verify required fields
+            if(!(isset($_POST['product_id'])) or $_POST['product_id'] == "")
+            {
+                //Echo the restul to the client
+                $response = (object) array('status' => 400);
+                $response->Error = 'Unable to find product: Missing product id';
+                http_response_code(400);
+                header('Content-type:application/json;charset=utf-8');
+                echo json_encode($response);
+                //Quit this call if the required fields are not present
+                die();
+            }
+            //grab the product id
+            $product_id = intval(test_input($_POST['product_id']));
+            $product = getProduct($product_id);
+            header('Content-type:application/json;charset=utf-8');
+            echo json_encode($product);
             die();
             break;
         default:
