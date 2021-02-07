@@ -75,12 +75,17 @@
         case 'get_products':
             //Check if there are any filters for the search
             $category_id = $_POST['category_id'] ? intval(test_input($_POST['category_id'])) : NULL;
+            echo "this is happening 1";
             $results = getProducts($category_id);
+            echo "this is happening 2";
             $products = (object) array(
                 'products' => $results
             );
+            echo "this is happening 3";
             header('Content-type:application/json;charset=utf-8');
+            echo "this is happening 4";
             echo json_encode($products);
+            echo "this is happening 5";
             die();
             break;
         default:
