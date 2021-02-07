@@ -69,7 +69,6 @@ function getProducts($category_id){
         #Create the statemment to insert  the new product in the products table 
         $stmt = "SELECT * FROM products ";
         $stmt .= $category_id ? " where category_id = :category_id;" : ";";
-        
         //Prepare the statement 
         $preparedStmt = $db->prepare($stmt);
         if(isset($category_id))

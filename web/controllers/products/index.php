@@ -13,6 +13,7 @@
     if ($action == NULL){
     $action = filter_input(INPUT_GET, 'action');
     }
+    echo $action;
     switch ($action){
         //Endpoint that creates a new product
         case 'create_new_product':
