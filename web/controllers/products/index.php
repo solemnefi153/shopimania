@@ -76,8 +76,11 @@
             //Check if there are any filters for the search
             $category_id = $_POST['category_id'] ? intval(test_input($_POST['category_id'])) : NULL;
             $results = getProducts($category_id);
+            $products = (object) array(
+                'products' => $results
+            );
             header('Content-type:application/json;charset=utf-8');
-            echo json_encode($results);
+            echo json_encode($products);
             die();
             break;
         default:
