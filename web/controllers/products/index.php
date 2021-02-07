@@ -13,7 +13,6 @@
     if ($action == NULL){
     $action = filter_input(INPUT_GET, 'action');
     }
-    echo $action;
     switch ($action){
         //Endpoint that creates a new product
         case 'create_new_product':
@@ -89,6 +88,7 @@
             //Verify required fields
             if(!(isset($_POST['product_id'])) or $_POST['product_id'] == "")
             {
+                echo 'this is happening 1';
                 //Echo the restul to the client
                 $response = (object) array('status' => 400);
                 $response->Error = 'Unable to find product: Missing product id';

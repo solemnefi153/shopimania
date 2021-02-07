@@ -96,7 +96,7 @@ function getProduct($product_id){
         //Set up a connection to the database 
         $db = databaseConnect(); 
         #Create the statemment to insert  the new product in the products table 
-        $stmt = "SELECT * FROM products where product_id = :category_id;";
+        $stmt = "SELECT * FROM products where product_id = :product_id;";
         //Prepare the statement 
         $preparedStmt = $db->prepare($stmt);
         $preparedStmt->bindValue(':product_id', $product_id, PDO::PARAM_INT);
