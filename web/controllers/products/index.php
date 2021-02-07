@@ -73,6 +73,7 @@
             break;
             //Endpoint that creates a new product
         case 'get_products':
+            echo "Negron";
             //Check if there are any filters for the search
             $category_id = $_POST['category_id'] ? intval(test_input($_POST['category_id'])) : NULL;
             echo "this is happening 1";
@@ -82,9 +83,9 @@
                 'products' => $results
             );
             echo "this is happening 3";
-            header('Content-type:application/json;charset=utf-8');
+            //header('Content-type:application/json;charset=utf-8');
             echo "this is happening 4";
-            echo json_encode($products);
+            //echo json_encode($products);
             echo "this is happening 5";
             die();
             break;
