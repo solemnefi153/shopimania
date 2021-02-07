@@ -99,16 +99,16 @@ INSERT INTO  products (
   product_id,
   category_id,
   product_name,
-  product_description,
   price, 
+  product_description,
   href
 )
 VALUES(
   nextval('products_sequence'),
   (select category_id from categories where description='men_clothing'),
   'Black V-Neck T-Shirt',
-  'Best quality an looks. Soft and light fabric.',
   15.99, 
+  'Best quality an looks. Soft and light fabric.',
   'https://m.media-amazon.com/images/I/61L9FFm56WL._AC_UL320_.jpg'
 );
 
@@ -128,16 +128,16 @@ INSERT INTO  products (
   product_id,
   category_id,
   product_name,
-  product_description,
   price, 
+  product_description,
   href
 )
 VALUES(
   nextval('products_sequence'),
   (select category_id from categories where description='men_clothing'),
   'Black V-Neck Blouse',
-  'Best quality an looks. Soft and light fabric.',
-  15.99, 
+  15.99,
+  'Best quality an looks. Soft and light fabric.', 
   'https://m.media-amazon.com/images/I/81OJAe9HhEL._AC_UL320_.jpg'
 );
 
